@@ -2,6 +2,7 @@
 from collections import deque
 import copy
 
+
 def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     '''
     Returns a list satisfying the following properties:
@@ -17,17 +18,19 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
     ```
     may give the output
     ```
-    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny', 'benny', 'bonny', 'boney', 'money']
+    ['stone', 'shone', 'phone', 'phony', 'peony', 'penny',
+    'benny', 'bonny', 'boney', 'money']
     ```
     but the possible outputs are not unique,
     so you may also get the output
     ```
-    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots', 'hooty', 'hooey', 'honey', 'money']
+    ['stone', 'shone', 'shote', 'shots', 'soots', 'hoots',
+    'hooty', 'hooey', 'honey', 'money']
     ```
     (We cannot use doctests here because the outputs are not unique.)
 
-    Whenever it is impossible to generate a word ladder between the two words,
-    the function returns `None`.
+    Whenever it is impossible to generate a word ladder between
+    the two words, the function returns `None`.
     '''
     dict = []
     ladder = [start_word]
@@ -37,8 +40,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
         return [start_word]
     with open(dictionary_file, 'r') as f:
         for word in f.readlines():
-            dict.append(word.strip('\n'))    
-    
+            dict.append(word.strip('\n'))
     ladders = deque()
     ladders.append(ladder)
     while ladders:
@@ -52,6 +54,7 @@ def word_ladder(start_word, end_word, dictionary_file='words5.dict'):
                 dict.remove(word)
                 ladders.append(new_ladder)
 
+
 def verify_word_ladder(ladder):
     '''
     Returns True if each entry of the input list is adjacent to its neighbors;
@@ -62,7 +65,7 @@ def verify_word_ladder(ladder):
     >>> verify_word_ladder(['stone', 'shone', 'phony'])
     False
     '''
-    if (ladder == []) or (ladder == None):
+    if (ladder == []) or (ladder is None):
         return False
     for k, word in enumerate(ladder):
         if k == len(ladder) - 1:
@@ -70,6 +73,7 @@ def verify_word_ladder(ladder):
         else:
             if not _adjacent(word, ladder[k + 1]):
                     return False
+
 
 def _adjacent(word1, word2):
     '''
